@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .message {
+            max-width: 70%; /* Adust the width as needed */
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .sender-message-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .receiver-message-container {
+            display: flex;
+        }
+
+        .sender-message {
+            background-color: #DCF8C6; /* Sender's message color */
+        }
+
+        .receiver-message {
+            background-color: #EAEAEA; /* Receiver's message color */
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="sender-message-container">
+            <div class="message sender-message">
+                Sender's message goes here. This is an example of a longer message from the sender.
+            </div>
+        </div>
+        <div class="receiver-message-container">
+            <div class="message receiver-message">
+                Receiver's message goes here.
+            </div>
+        </div>
+        <div class="sender-message-container">
+            <div class="message sender-message">
+                Another message from the sender.
+            </div>
+        </div>
+        <div class="receiver-message-container">
+            <div class="message receiver-message">
+                Another message from the receiver.
+            </div>
+        </div>
+        <!-- Add more messages here -->
+    </div>
+</body>
+</html>

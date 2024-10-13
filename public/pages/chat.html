@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <title>Various Chats</title>
+</head>
+
+<body>
+    <section id="container">
+        <div class="chat-box">
+            <div class="chat-description-container">
+                <input type="checkbox" id="chek">
+                <div class="chat-container">
+                    <div class="chat-head">
+                        <label for="chek"><img id="chek-now" src="../chat-images/1.jpeg"></label>
+                        <a href=""><img id="img-size" src="../chat-images/group.png"
+                                style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);"></a>
+                        <a href=""><i class="fab fa-whatsapp"></i></a>
+                        <a href=""><i class="fa fa-commenting-o"></i></a>
+                        <a href=""><img id="img-size" src="../chat-images/down-arrow.png"
+                                style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);"></a>
+                    </div>
+                </div>
+                <div class="chat-search">
+                    <form id="get-user" action="/" method="POST">
+                        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                        <input type="text" class="search" id="auto-search-user" name="search"
+                            placeholder="Search or start a new chat ...">
+                    </form>
+                </div>
+                <div class="chat-description">
+                    <div id="search-results-container" class="chat-details"></div>
+                </div>
+                <div class="chat-modal-container">
+                    <div class="chat-modal">
+                        <div class="profile-heading">
+                            <div class="profile-head">
+                                <label for="chek"><img id="chek-now" src="../chat-images/left-arrow.png"
+                                        style="filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(50deg) brightness(114%) contrast(98%);"></label>
+                                <h3>Profile</h3>
+                            </div>
+                        </div>
+                        <div class="profile-image">
+                            <div class="profile-image-con">
+                                <img src="../chat-images/1.jpeg">
+                            </div>
+                        </div>
+                        <div class="profile-name">
+                            <div class="profile-name-details">
+                                <h4>Your name</h4>
+                                <div class="title-details">
+                                    <h3>Eze Moses John</h3>
+                                    <div class="title-details-img">
+                                        <a href=""><img src="../chat-images/pencil.png"
+                                                style="filter: invert(51%) sepia(2%) saturate(111%) hue-rotate(318deg) brightness(99%) contrast(78%);"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-name">
+                            <div class="profile-name-details">
+                                <h4>About</h4>
+                                <div class="title-details">
+                                    <h3>Fourteen 36</h3>
+                                    <div class="title-details-img">
+                                        <a href=""><img src="../chat-images/pencil.png"
+                                                style="filter: invert(51%) sepia(2%) saturate(111%) hue-rotate(318deg) brightness(99%) contrast(78%);"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-messages-container">
+                <input type="checkbox" id="message-toggle">
+                <a class="message-head" href="">
+                    <div class="friend-details">
+                        <label for="message-toggle"><img src="../chat-images/1.jpeg"></label>
+                        <div class="friend-contact">
+                            <h3>Okechukwu</h3>
+                            <h4>09022931212</h4>
+                        </div>
+                    </div>
+                    <div class="friend-name">
+                        <img src="../chat-images/camera.png"
+                            style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);">
+                        <img src="../chat-images/telephone.png"
+                            style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);">
+                        <img src="../chat-images/search-interface-symbol.png"
+                            style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);">
+                    </div>
+                </a>
+                <div class="chat-messages">
+                    <div id="chat-container"></div>
+                </div>
+                <div class="message-foot">
+                    <form action="." method="POST">
+                        <a href=""><img id="add" src="../chat-images/add.png"
+                                style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);"></a>
+                        <input type="text" name="message" id="send-message" placeholder="Type a message">
+                        <button type="submit" id="submit"><i class="fa fa-send-o"></i></button>
+                    </form>
+                </div>
+                <div class="message-modal">
+                    <div class="message-heading">
+                        <label for="message-toggle"><img src="../chat-images/cancel.png"
+                                style="filter: invert(52%) sepia(11%) saturate(25%) hue-rotate(317deg) brightness(94%) contrast(82%);"></label>
+                        <h3>Contact info</h3>
+                    </div>
+                    <div class="message-image-details">
+                        <div class="img-con-details">
+                            <img src="../chat-images/1.jpeg">
+                        </div>
+                        <h3>Eze</h3>
+                        <h4>+2349022931212</h4>
+
+                        <div class="message-icons">
+                            <div class="audio">
+                                <i class="fa fa-phone"></i>
+                                <h5>Audio</h5>
+                            </div>
+                            <div class="video">
+                                <i class="fa fa-video-camera"></i>
+                                <h5>Video</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-description">
+                        <h3>About</h3>
+                        <h4>💫I HUSTLE🏍️I RIDE📸I FILM🤩I ENTERTAIN😋</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+    <script src="../dist/chatPage.bundle.js"></script>
+</body>
+
+</html>

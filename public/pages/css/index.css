@@ -1,0 +1,152 @@
+:root{
+    --typewriterCharacters: 74;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.chat-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.chat-text {
+    width: 100%;
+    font-family: sans-serif;
+    line-height: 2;
+    color: gray;
+    padding: 1rem;
+}
+
+.chat-text h1 {
+    font-weight: lighter;
+    font-size: clamp(.1rem, 2vw + .1rem, 2rem);
+    width: 100%;
+    position: relative;
+}
+
+h1::before,
+h1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h1::before{
+    background:  #fff;
+    animation: typespeed 4s steps(var(--typewriterCharacters)) forwards;
+}
+
+@keyframes typespeed {
+    to {
+        left: 100%;
+    }
+}
+
+.chat-text h2 {
+    font-weight: lighter;
+    font-size: clamp(.1rem, 2vw + .1rem, 1.8rem);
+    width: 100%;
+    position: relative;
+}
+
+h2::before,
+h2::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h2::before {
+    background:  #fff;
+    animation: typespeed_2 10s ease 1.7s forwards;
+}
+
+@keyframes typespeed_2  {
+    to {
+        left: 100%;
+    }
+}
+
+.chat-text h3 {
+    font-size: clamp(.1rem, 2vw + .1rem, 1.3rem);
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    width: 100%;
+    position: relative;
+}
+
+h3::before,
+h3::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h3::before {
+    background:  #fff;
+    animation: typespeed_3 10s ease 4s forwards;
+}
+
+@keyframes typespeed_3  {
+    to {
+        left: 100%;
+    }
+}
+
+.chat-text a {
+    text-decoration: none;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    width: max-content;
+    margin: 0 auto;
+    padding: 7px 25px;
+    background-color: teal;
+    color: #fff;
+    transition: .5s ease;
+}
+
+.subtitle  {
+    color:#000;
+    font-size: 1rem;
+    font-weight: lighter;
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: fadeInUp 2s ease 8s forwards; 
+}
+
+.subtitle:hover{
+    background-color: rgb(0, 88, 88);
+}
+
+.subtitle i {
+    margin-left: .5rem;
+    text-align: center;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}  
