@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 .5rem;
+}
+
+a {
+    border: none;
+    background: teal;
+    color: aliceblue;
+    outline: none;
+    cursor: pointer;
+    width: 100px;
+    padding: 1rem ;
+    border-radius: 3px;
+    text-align: center;
+    transition: .3s ease-in-out;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+
+ a.btn:hover {
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(128, 128, 128, .3);
+    color: teal;
+
+}
+
+.sender {
+    margin-right:2rem;
+} 
