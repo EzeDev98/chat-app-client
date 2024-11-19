@@ -52,15 +52,13 @@ form.addEventListener('submit', function(event) {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => {
+    .then(async response => {
         if (response.ok || response === 200 || response === 201) {
-            return response.json().then(() => {
-                window.location.href = '/pages/login.html';
-            });
+            await response.json();
+            window.location.href = '/pages/login.html';
         } else {
-            return response.json().then(data => {
-                displayErrorMessages(data.message || 'An error occurred. User not registered');
-            });
+            const data = await response.json();
+            displayErrorMessages(data.message || 'An error occurred. User not registered');
         }
     })
     .catch(error => {
