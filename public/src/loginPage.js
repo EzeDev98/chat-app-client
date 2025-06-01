@@ -1,75 +1,74 @@
-const form = document.getElementById("login");
-const errorMessage = document.getElementById("error-message");
-const errorText = document.getElementById("error-text");
+import { loginUser } from "./apiService";
+import { displayErrorMessages, setupPasswordToggle } from "./utils";
 
-form.addEventListener("submit", function(event) {
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("login");
+  const errorMessage = document.getElementById("error-message");
+  const errorText = document.getElementById("error-text");
+
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     errorMessage.style.display = "none";
-    errorText.innerHTML = '';
+    errorText.innerHTML = "";
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Use empty string check instead of null
-    if (username === "") {
-        displayErrorMessages("Username field cannot be empty");
-        return;
+    if (username === "" || username === null) {
+      displayErrorMessages("Username field cannot be empty");
+      return;
     }
 
-    if (password === "") {
-        displayErrorMessages("Password field cannot be empty");
-        return;
+    if (password === "" || password === null) {
+      displayErrorMessages("Password field cannot be empty");
+      return;
     }
 
-    const formData = {
+    try {
+      const formData = {
         username: username,
         password: password,
-    };
+      };
 
-    // Log formData for debugging
-    console.log("Form Data Sent: ", formData);
+      const response = await loginUser(formData);
 
-    fetch("http://localhost:3030/api/v1/login-user", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        console.log("Raw Response from server: ", response);
+      console.log("Login response:", response);
 
-        // response.ok checks for 2xx status codes
-        if (response.ok) {
-            return response.json();
-        } else {
-            // Handle error response and display messages
-            return response.json().then(data => {
-                displayErrorMessages(data.messages || "Login failed!");
-            });
-        }
-    })
-    .then(payload => {
-        // Only proceed if payload is valid
-        if (payload && payload.payload && payload.payload.username) {
-            const loggedInUser = payload.payload.username;
-            console.log("User: ", loggedInUser);
+      if (!response) {
+        displayErrorMessages("Invalid response from server");
+        return;
+      }
 
-            // Redirect to chat page with user as a query parameter
-            window.location.href = `/pages/chat.html?user=${encodeURIComponent(loggedInUser)}`;
-        } else {
-            displayErrorMessages("Login failed! Invalid response from server.");
-        }
-    })
-    .catch(error => {
-        console.error("Error: ", error);
-        displayErrorMessages("An unexpected error occurred. Login failed");
-    });
+      saveUserDetails(response);
+      window.location.href = "/pages/chat.html";
+    } catch (error) {
+      console.error("Login error:", error);
+      displayErrorMessages(error.message || "Login failed. Please try again.");
+    } finally {
+    }
+  });
+
+  setupPasswordToggle();
 });
 
-// Function to display error messages
-function displayErrorMessages(messages) {
-    errorText.innerHTML = messages;
-    errorMessage.style.display = 'block';
+
+function saveUserDetails(response) {
+
+  let profilePicture = response.profilePicture || '';
+  
+  profilePicture = profilePicture.replace(/['"]/g, '').trim();
+  
+  if (profilePicture && !profilePicture.startsWith('http')) {
+    profilePicture = `http://localhost:3030/uploads/${profilePicture}`;
+  }
+
+  localStorage.setItem("userId", response.userId);
+  localStorage.setItem("username", response.username);
+  localStorage.setItem("firstname", response.firstname);
+  localStorage.setItem("lastname", response.lastname);
+  localStorage.setItem("email", response.email);
+  localStorage.setItem("phoneNumber", response.phoneNumber);
+  localStorage.setItem("profilePicture", profilePicture);
+  localStorage.setItem("token", response.token);
 }

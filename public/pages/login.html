@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/login.css">
     <title>Login form </title>
 </head>
@@ -22,11 +23,14 @@
                 <form id="login" action="/" method="POST">
                     <div class="box">
                         <input id="username" type="text" name="username" class="input-fields"
-                            placeholder="Enter your username ..." required>
+                            placeholder="Enter your email" required>
                     </div>
                     <div class="box">
                         <input id="password" type="text" name="password" class="input-fields"
-                            placeholder="Enter your password ..." required>
+                            placeholder="Enter your password" required>
+                            <button type="button" id="togglePassword" class="toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
                     </div>
                     <div class="box">
                         <input type="submit" class="input-btn" value="Login">

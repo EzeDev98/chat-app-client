@@ -1,13 +1,43 @@
+import { registerUser } from "./apiService";
+import { displayErrorMessages, setupPasswordToggle, isValidPassword } from "./utils";
 
-const form = document.getElementById("signup");
-const errorMessage = document.getElementById("error-message");
-const errorText = document.getElementById("error-text");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("signup");
+  const errorMessage = document.getElementById("error-message");
+  const errorText = document.getElementById("error-text");
+  const profilePictureInput = document.getElementById("profilePicture");
+  const previewContainer = document.getElementById("preview-container");
+  const previewImage = document.getElementById("preview-image");
 
-form.addEventListener('submit', function(event) {
+  profilePictureInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      if (!file.type.match("image.*")) {
+        displayErrorMessages("Please select an image file (JPEG, PNG, etc.)");
+        this.value = "";
+        return;
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        displayErrorMessages("Image size too large. Maximum 2MB allowed.");
+        this.value = "";
+        return;
+      }
+
+      const objectUrl = URL.createObjectURL(file);
+      previewImage.src = objectUrl;
+      previewContainer.style.display = "block";
+    } else {
+      previewContainer.style.display = "none";
+      previewImage.src = "#";
+    }
+  });
+
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    errorMessage.style.display = 'none';
-    errorText.innerHTML = '';
+    errorMessage.style.display = "none";
+    errorText.innerHTML = "";
 
     const firstName = document.getElementById("firstname").value.trim();
     const lastName = document.getElementById("lastname").value.trim();
@@ -15,69 +45,82 @@ form.addEventListener('submit', function(event) {
     const email = document.getElementById("email").value.trim();
     const phoneNumber = document.getElementById("phoneNumber").value.trim();
     const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;   
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // Password match check
-    if (password !== confirmPassword) {
-        displayErrorMessages("Passwords do not match");
-        return;
+    if (!firstName) {
+      displayErrorMessages("First name is required");
+      return;
     }
 
-    // Phone number validation
+    if (!lastName) {
+      displayErrorMessages("Last name is required");
+      return;
+    }
+
+    if (!username) {
+      displayErrorMessages("Username is required");
+      return;
+    }
+
+    if (!email) {
+      displayErrorMessages("Email is required");
+      return;
+    }
+
+    if (!phoneNumber) {
+      displayErrorMessages("Phone number is required");
+      return;
+    }
+
     if (phoneNumber.length !== 11 || !/^\d+$/.test(phoneNumber)) {
-        displayErrorMessages("Invalid phone number. Phone number should be exactly 11 digits.");
-        return;
+      displayErrorMessages("Invalid phone number. Must be exactly 11 digits.");
+      return;
     }
 
-    // Password validation
+    if (!password) {
+      displayErrorMessages("Password is required");
+      return;
+    }
+
     if (!isValidPassword(password)) {
-        displayErrorMessages("Password must contain at least 8 characters, including uppercase, lowercase, special characters and a number.");
-        return;
+      displayErrorMessages("Password must contain: 8+ characters, uppercase, lowercase, number, and special character");
+      return;
     }
 
-    const formData = {
-        first_name: firstName,
-        last_name: lastName,
-        username: username,
-        email: email,
-        phone_number: phoneNumber,
-        password: password,
-        confirm_password: confirmPassword,
-    };
+    if (password !== confirmPassword) {
+      displayErrorMessages("Passwords do not match");
+      return;
+    }
 
-    fetch('http://localhost:3030/api/v1/create-user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(async response => {
-        if (response.ok || response === 200 || response === 201) {
-            await response.json();
-            window.location.href = '/pages/login.html';
-        } else {
-            const data = await response.json();
-            displayErrorMessages(data.message || 'An error occurred. User not registered');
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        displayErrorMessages("An unexpected error occurred");
-    });
+    try {
+
+      const formData = new FormData();
+      formData.append("first_name", firstName);
+      formData.append("last_name", lastName);
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("phone_number", phoneNumber);
+      formData.append("password", password);
+      formData.append("confirm_password", confirmPassword);
+
+      const file = profilePictureInput.files[0];
+      if (file) {
+        formData.append("profilePicture", file);
+      }
+
+      const response = await registerUser(formData);
+
+      if (response) {
+        window.location.href = "login.html";
+      } else {
+        const errorMsg = response?.message || "Registration failed. Please try again.";
+        displayErrorMessages(errorMsg);
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      displayErrorMessages(error.message || "An error occurred during registration");
+    }
+  });
+
+  setupPasswordToggle();
 });
-
-function isValidPassword(password) {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    return password.length >= minLength && hasUpperCase && hasLowerCase && hasSpecialChar && hasNumber; 
-}
-
-function displayErrorMessages(messages) {
-    errorText.innerHTML = messages;
-    errorMessage.style.display = 'block';
-}
