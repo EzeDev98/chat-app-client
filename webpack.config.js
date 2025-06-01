@@ -7,6 +7,7 @@ module.exports = {
         loginPage: "./public/src/loginPage.js",
         signupPage: "./public/src/signupPage.js",
         chatPage: "./public/src/chatPage.js",
+        userService: "./public/src/userService.js",
     },
     output: {
         path: path.resolve(__dirname, "public/dist"),

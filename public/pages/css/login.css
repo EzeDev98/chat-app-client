@@ -93,7 +93,7 @@ form {
 
 .input-btn {
     padding: 12px 30px;
-    background: teal;
+    background: #008080;
     border: 0;
     outline: none;
     color: #f1eded;
@@ -125,6 +125,58 @@ form {
     color: teal;
     margin-left: 8px;
 }
+
+
+.box {
+    margin-bottom: 20px;
+    position: relative; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    z-index: 2;
+    padding: 5px;
+}
+
+.input-fields {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    background: transparent;
+    outline: none;
+    border-bottom: .5px solid rgba(0, 128, 128, .2);
+    color: gray;
+    padding-left: 20px;
+    padding-right: 40px; 
+}
+
+.box .password-toggle {
+    position: relative;
+}
+  
+.box .password-toggle input {
+    padding-right: 40px;
+}
+  
+.box .password-toggle .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+}
+
 
 @media (max-width: 375px) {
     
